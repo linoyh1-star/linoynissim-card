@@ -73,16 +73,17 @@
   h2 { margin: 38px 0 14px; font-size: 13px; font-weight: 500; letter-spacing: .6px; color: var(--muted); display: flex; align-items: center; gap: 12px; }
   h2::before, h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to left, transparent, #ffc9a6); }
   h2::after { background: linear-gradient(to right, transparent, #ffc9a6); }
-  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .gallery button { padding: 0; border: 0; background: var(--soft); border-radius: 12px; overflow: hidden; cursor: zoom-in; aspect-ratio: 1; }
-  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
-  .gallery button:hover img { transform: scale(1.04); }
-  .gallery:not(.open) .more { display: none; }
-  .show-more {
-    margin-top: 12px; background: none; border: 1px solid var(--line); border-radius: 99px; padding: 8px 18px;
-    font: 500 14px "Rubik", sans-serif; color: var(--orange-text); cursor: pointer;
+  .gallery {
+    display: flex; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0 -16px; padding: 4px 16px 12px; scrollbar-width: none;
   }
-  .show-more:hover { border-color: #ffc9a6; }
+  .gallery::-webkit-scrollbar { display: none; }
+  .gallery button {
+    flex: 0 0 72%; scroll-snap-align: center; padding: 0; border: 0; background: var(--soft);
+    border-radius: 16px; overflow: hidden; cursor: zoom-in; aspect-ratio: 1;
+    box-shadow: 0 8px 20px -14px #2a211c66;
+  }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .lb { position: fixed; inset: 0; z-index: 20; background: #1b1411ee; display: none; align-items: center; justify-content: center; touch-action: pan-y; }
   .lb.on { display: flex; animation: fade .2s ease-out; }
   .lb img { width: min(92vw, 560px); aspect-ratio: 1; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 50px -20px #000; }
@@ -218,19 +219,19 @@
     <button type="button" data-i="3"><img src="gallery/p09.jpg" alt="מתוך אירוע" loading="lazy"></button>
     <button type="button" data-i="4"><img src="gallery/p01.jpg" alt="מתוך אירוע" loading="lazy"></button>
     <button type="button" data-i="5"><img src="gallery/p03.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="6" class="more"><img src="gallery/p02.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="7" class="more"><img src="gallery/p05.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="8" class="more"><img src="gallery/p07.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="9" class="more"><img src="gallery/p08.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="10" class="more"><img src="gallery/p12.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="11" class="more"><img src="gallery/p13.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="12" class="more"><img src="gallery/p15.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="13" class="more"><img src="gallery/p10.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="14" class="more"><img src="gallery/p11.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="15" class="more"><img src="gallery/p14.jpg" alt="מתוך אירוע" loading="lazy"></button>
-    <button type="button" data-i="16" class="more"><img src="gallery/p04.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="6"><img src="gallery/p02.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="7"><img src="gallery/p05.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="8"><img src="gallery/p07.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="9"><img src="gallery/p08.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="10"><img src="gallery/p12.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="11"><img src="gallery/p13.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="12"><img src="gallery/p15.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="13"><img src="gallery/p10.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="14"><img src="gallery/p11.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="15"><img src="gallery/p14.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="16"><img src="gallery/p04.jpg" alt="מתוך אירוע" loading="lazy"></button>
   </div>
-  <button class="show-more" id="showMore" type="button">לכל התמונות (17)</button>
+  <div class="dots" id="galDots"></div>
 
   <h2>מה אומרים</h2>
   <div class="reviews" id="reviews">
@@ -345,7 +346,7 @@
       <footer><b>יובל</b> · מסיבת רווקות</footer>
     </article>
   </div>
-  <div class="dots" id="dots"></div>
+  <div class="dots" id="revDots"></div>
 
   <a class="site" href="https://www.linoynissim.co.il" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -367,12 +368,22 @@
 <div class="toast" id="toast">הקישור הועתק</div>
 
 <script>
-  const rv = document.getElementById('reviews'), dotsBox = document.getElementById('dots');
-  [...rv.children].forEach((_, i) => dotsBox.appendChild(Object.assign(document.createElement('i'), { className: i ? '' : 'on' })));
-  const dots = [...dotsBox.children];
+  // swipe strip + position dots
+  const strip = (box, dotsBox) => {
+    const items = [...box.children];
+    items.forEach((_, i) => dotsBox.appendChild(Object.assign(document.createElement('i'), { className: i ? '' : 'on' })));
+    const dots = [...dotsBox.children];
+    box.addEventListener('scroll', () => {
+      const mid = box.getBoundingClientRect().left + box.clientWidth / 2;
+      let best = 0, dist = Infinity;
+      items.forEach((c, i) => { const r = c.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid); if (d < dist) { dist = d; best = i; } });
+      dots.forEach((d, i) => d.classList.toggle('on', i === best));
+    }, { passive: true });
+  };
+  strip(document.getElementById('reviews'), document.getElementById('revDots'));
+  strip(document.getElementById('gallery'), document.getElementById('galDots'));
 
   const gal = document.getElementById('gallery'), shots = [...gal.querySelectorAll('img')].map(i => i.src);
-  document.getElementById('showMore').addEventListener('click', e => { gal.classList.add('open'); e.currentTarget.remove(); });
   const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCount = document.getElementById('lbCount');
   let cur = 0;
   const show = i => { cur = (i + shots.length) % shots.length; lbImg.src = shots[cur]; lbCount.textContent = `${cur + 1} / ${shots.length}`; };
@@ -386,12 +397,6 @@
   let x0 = null;
   lb.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
   lb.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(cur + (dx > 0 ? 1 : -1)); x0 = null; });
-  rv.addEventListener('scroll', () => {
-    const cards = [...rv.children], mid = rv.getBoundingClientRect().left + rv.clientWidth / 2;
-    let best = 0, dist = Infinity;
-    cards.forEach((c, i) => { const r = c.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid); if (d < dist) { dist = d; best = i; } });
-    dots.forEach((d, i) => d.classList.toggle('on', i === best));
-  }, { passive: true });
   document.getElementById('share').addEventListener('click', async () => {
     const data = { title: 'לינוי ניסים ונפלאות', text: 'סטנדאפיסטית וקומיקאית לאירועים 🎤', url: location.href };
     try {
