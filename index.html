@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="he" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>לינוי ניסים ונפלאות</title>
+<meta name="description" content="כרטיס הביקור שיענה על כל השאלות">
+<link rel="canonical" href="https://linoyh1-star.github.io/linoynissim-card/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://linoyh1-star.github.io/linoynissim-card/">
+<meta property="og:title" content="לינוי ניסים ונפלאות">
+<meta property="og:description" content="כרטיס הביקור שיענה על כל השאלות">
+<meta property="og:image" content="https://linoyh1-star.github.io/linoynissim-card/linoy.jpg">
+<meta property="og:image:width" content="480">
+<meta property="og:image:height" content="480">
+<meta property="og:locale" content="he_IL">
+<meta name="twitter:card" content="summary">
+<meta name="theme-color" content="#fff4ec">
+<link rel="icon" href="linoy.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Rubik:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #fffcf9;
+    --card: #ffffff;
+    --line: #f0e6de;
+    --text: #2a211c;
+    --muted: #7b6e66;
+    --soft: #fff1e7;
+    --ink: #2a211c;
+    --orange: #ff914d;
+    --orange-deep: #ee7330;
+    --orange-text: #b8561f;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body { background: var(--bg); }
+  body {
+    font-family: "Rubik", system-ui, sans-serif;
+    color: var(--text);
+    min-height: 100dvh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px 28px;
+    background:
+      radial-gradient(60vmax 32vmax at 50% -8%, #ffe3cf 0%, transparent 70%),
+      var(--bg);
+    -webkit-font-smoothing: antialiased;
+  }
+  main { width: 100%; max-width: 420px; text-align: center; }
+
+  .photo {
+    width: 136px; height: 136px; margin: 0 auto;
+    border-radius: 50%; padding: 3px;
+    background: linear-gradient(140deg, #ffb27f, var(--orange-deep));
+    box-shadow: 0 18px 38px -18px #ee733099;
+  }
+  .photo img { width: 100%; height: 100%; border-radius: 50%; object-fit: cover; display: block; border: 3px solid var(--card); }
+
+  h1 { margin-top: 18px; font-size: 28px; font-weight: 800; letter-spacing: -.3px; line-height: 1.15; }
+  .role { margin-top: 8px; font-size: 16px; font-weight: 500; line-height: 1.4; color: var(--text); text-wrap: balance; }
+  .about { margin: 10px auto 0; max-width: 340px; font-size: 15px; line-height: 1.6; color: var(--muted); }
+  .tags {
+    margin: 16px auto 0; width: fit-content; max-width: 100%; display: flex; align-items: center; gap: .45em;
+    list-style: none; white-space: nowrap; padding: 6px 12px; border-radius: 99px;
+    background: var(--soft); color: var(--orange-text); font-weight: 500; font-size: min(13px, 3.05vw);
+  }
+  .tags li + li::before { content: ""; display: inline-block; width: 3px; height: 3px; border-radius: 50%; background: var(--orange); margin-inline-end: .45em; vertical-align: middle; }
+
+  h2 { margin: 38px 0 14px; font-size: 13px; font-weight: 500; letter-spacing: .6px; color: var(--muted); display: flex; align-items: center; gap: 12px; }
+  h2::before, h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to left, transparent, #ffc9a6); }
+  h2::after { background: linear-gradient(to right, transparent, #ffc9a6); }
+  .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; }
+
+  .reviews {
+    display: flex; align-items: flex-start; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
+    margin: 0 -16px; padding: 4px 16px 12px; scrollbar-width: none;
+  }
+  .reviews::-webkit-scrollbar { display: none; }
+  .review {
+    flex: 0 0 84%; scroll-snap-align: center; text-align: right;
+    background: var(--card); border: 1px solid var(--line); border-radius: 16px; padding: 18px 18px 16px;
+    position: relative;
+  }
+  .review::before { content: "”"; position: absolute; top: 4px; left: 14px; font-size: 48px; line-height: 1; color: #ffd2b3; font-weight: 800; }
+  .review p { font-size: 14px; line-height: 1.6; white-space: pre-line; }
+  .review footer { margin-top: 10px; font-size: 13px; color: var(--muted); }
+  .review footer b { color: var(--text); font-weight: 700; }
+  .dots { display: flex; justify-content: center; gap: 6px; }
+  .dots i { width: 6px; height: 6px; border-radius: 99px; background: var(--line); transition: .2s; }
+  .dots i.on { width: 18px; background: var(--orange); }
+
+  .social { margin-top: 22px; display: flex; justify-content: center; gap: 12px; }
+  .social a {
+    width: 46px; height: 46px; border-radius: 50%; display: grid; place-items: center;
+    color: var(--ink); border: 1px solid var(--line); background: var(--card); transition: background .15s, color .15s, border-color .15s;
+  }
+  .social a:hover { background: var(--orange); color: #fff; border-color: var(--orange); }
+  .social a:active { transform: scale(.94); }
+  .social svg { width: 20px; height: 20px; }
+
+  .contact { margin-top: 22px; display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+  .btn {
+    display: flex; align-items: center; justify-content: center; gap: 9px;
+    padding: 15px 10px; border-radius: 14px; text-decoration: none;
+    font: 500 16px "Rubik", sans-serif; transition: transform .15s, background .15s, border-color .15s;
+  }
+  .btn:active { transform: scale(.97); }
+  .btn svg { width: 20px; height: 20px; flex: none; }
+  .btn-call, .btn-wa { background: var(--card); color: var(--text); border: 1px solid var(--line); }
+  .btn-call:hover, .btn-wa:hover { border-color: #ffc9a6; }
+  .btn-call svg, .btn-wa svg { color: var(--orange-deep); }
+  .btn-save {
+    margin-top: 10px; width: 100%; color: #fff; padding: 17px;
+    background: linear-gradient(135deg, #ffa063, var(--orange-deep));
+    box-shadow: 0 14px 28px -16px #ee7330;
+  }
+  .btn-save:hover { filter: brightness(1.04); }
+
+  .site { margin-top: 28px; display: inline-flex; align-items: center; gap: 6px; color: var(--text); font-weight: 500; font-size: 15px; text-decoration: none; border-bottom: 1px solid var(--line); padding-bottom: 2px; }
+  .site:hover { border-color: var(--orange); }
+  .site svg { color: var(--orange-deep); }
+  .site svg { width: 16px; height: 16px; }
+
+  .share {
+    display: flex; margin: 16px auto 0; background: none; border: 0; color: var(--muted); cursor: pointer;
+    font: 500 14px "Rubik", sans-serif; align-items: center; gap: 6px; padding: 8px;
+  }
+  .share svg { width: 16px; height: 16px; }
+  .toast { position: fixed; bottom: 24px; left: 50%; transform: translate(-50%, 20px); opacity: 0;
+    background: var(--text); color: #fff; padding: 10px 18px; border-radius: 99px; font-size: 14px; transition: .25s; pointer-events: none; }
+  .toast.show { opacity: 1; transform: translate(-50%, 0); }
+
+  .hero { position: relative; }
+
+  .nudge { animation: nudge 5s ease-in-out 1.2s infinite; }
+  .contact .nudge:nth-child(2) { animation-delay: 1.38s; }
+  .btn-save.nudge { animation-delay: 1.56s; }
+  @keyframes nudge { 0%, 84%, 100% { translate: 0 0; } 88% { translate: 0 -3px; } 92% { translate: 0 0; } 95% { translate: 0 -1px; } }
+
+  main > * { animation: in .5s ease-out both; }
+  main > *:nth-child(2) { animation-delay: .05s; }
+  main > *:nth-child(3) { animation-delay: .1s; }
+  main > *:nth-child(n+4) { animation-delay: .15s; }
+  @keyframes in { from { opacity: 0; transform: translateY(8px); } }
+  @media (prefers-reduced-motion: reduce) { * { animation: none !important; transition: none !important; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="hero">
+    <div class="photo"><img src="linoy.jpg" alt="לינוי ניסים" width="136" height="136"></div>
+  </div>
+
+  <header>
+    <h1>לינוי ניסים ונפלאות</h1>
+    <p class="role">סטנדאפיסטית וקומיקאית לאירועים פרטיים וחברות</p>
+    <p class="about">מופע סטנדאפ ומשחקים מצחיקים ומגבשים, שנשארים איתכם הרבה אחרי שהאירוע נגמר.</p>
+    <ul class="tags">
+      <li>ימי הולדת</li><li>ימי גיבוש</li><li>מסיבות רווקות</li><li>הפרשת חלה</li><li>טקסי חופה</li>
+    </ul>
+  </header>
+
+  <nav class="social" aria-label="רשתות חברתיות">
+    <a href="https://www.instagram.com/linoynissim/" target="_blank" rel="noopener" aria-label="אינסטגרם">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.4" cy="6.6" r=".7" fill="currentColor"/></svg>
+    </a>
+    <a href="https://www.facebook.com/linoynissim" target="_blank" rel="noopener" aria-label="פייסבוק">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M24 12a12 12 0 1 0-13.9 11.9v-8.4h-3V12h3V9.4c0-3 1.8-4.7 4.5-4.7 1.3 0 2.7.2 2.7.2v3h-1.5c-1.5 0-2 .9-2 1.9V12h3.4l-.5 3.5h-2.9v8.4A12 12 0 0 0 24 12z"/></svg>
+    </a>
+    <a href="https://www.youtube.com/@LinoyNissim" target="_blank" rel="noopener" aria-label="יוטיוב">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2 31 31 0 0 0 0 12a31 31 0 0 0 .5 5.8 3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1A31 31 0 0 0 24 12a31 31 0 0 0-.5-5.8zM9.6 15.6V8.4l6.2 3.6-6.2 3.6z"/></svg>
+    </a>
+  </nav>
+
+  <div class="contact">
+    <a class="btn btn-call nudge" href="tel:+972509419988">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"/></svg>
+      שיחה
+    </a>
+    <a class="btn btn-wa nudge" href="https://wa.me/972509419988?text=%D7%94%D7%99%D7%99%20%D7%9C%D7%99%D7%A0%D7%95%D7%99%2C%20%D7%94%D7%92%D7%A2%D7%AA%D7%99%20%D7%9E%D7%9B%D7%A8%D7%98%D7%99%D7%A1%20%D7%94%D7%91%D7%99%D7%A7%D7%95%D7%A8%20%D7%A9%D7%9C%D7%9A%20%F0%9F%99%82" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.5 14.4c-.3-.1-1.8-.9-2-1-.3-.1-.5-.1-.7.1-.2.3-.8 1-.9 1.2-.2.2-.3.2-.6.1-.3-.1-1.3-.5-2.4-1.5-.9-.8-1.5-1.8-1.7-2.1-.2-.3 0-.5.1-.6l.4-.5c.2-.2.2-.3.3-.5.1-.2 0-.4 0-.5l-.9-2.2c-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.2 5.1 4.5.7.3 1.3.5 1.7.6.7.2 1.4.2 1.9.1.6-.1 1.8-.7 2-1.4.2-.7.2-1.3.2-1.4-.1-.1-.3-.2-.6-.3M12 21.8c-1.8 0-3.5-.5-5-1.4l-.4-.2-3.7 1 1-3.6-.2-.4A9.8 9.8 0 0 1 2.2 12C2.2 6.6 6.6 2.2 12 2.2c2.6 0 5.1 1 6.9 2.9a9.7 9.7 0 0 1 2.9 6.9c0 5.4-4.4 9.8-9.8 9.8M20.5 3.5A11.8 11.8 0 0 0 12 0C5.5 0 .2 5.3.2 11.9c0 2.1.5 4.1 1.6 5.9L.1 24l6.3-1.7c1.7.9 3.7 1.4 5.6 1.4 6.6 0 11.9-5.3 11.9-11.9 0-3.2-1.2-6.2-3.4-8.3"/></svg>
+      וואטסאפ
+    </a>
+  </div>
+
+  <a class="btn btn-save nudge" href="linoy-nissim.vcf" download="לינוי ניסים.vcf">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></svg>
+    שמירה באנשי הקשר
+  </a>
+
+  <h2>מהאירועים האחרונים</h2>
+  <div class="gallery">
+    <img src="gallery/1.jpg" alt="לינוי מנחה משחק עם חוגגת" loading="lazy">
+    <img src="gallery/2.jpg" alt="מופע ביום הולדת" loading="lazy">
+    <img src="gallery/3.jpg" alt="משחק עם כיסויי עיניים" loading="lazy">
+  </div>
+
+  <h2>מה אומרים</h2>
+  <div class="reviews" id="reviews">
+    <article class="review">
+      <p>לינוי יקרה,
+איזו אלופה את! הצלחת להפוך את יום ההולדת של אמא לחוויה שלא נשכח. מהרגע שנכנסת לדמותה של לטיפה כולנו האמנו, צחקנו מכל הלב ופשוט נסחפנו איתך.
+
+יש לך כישרון מיוחד לחבר בין אנשים, לשבור את הקרח ולהכניס כל כך הרבה שמחה ואנרגיה טובה לחדר. בזכותך הערב היה מלא בצחוק ורגעים בלתי נשכחים!
+תודה על הכל ושניפגש בשמחות 🎉</p>
+      <footer><b>רותם</b> · יום הולדת 60 לאמא</footer>
+    </article>
+    <article class="review">
+      <p>היי חיים שלי ❤️ כמובן שאני הכי ממליצה עלייך בעולם!!! את מה שעשית לי את המסיבת רווקות וכולן אחר כך באו ואמרו לי שאת הכי מצחיקה בעולם ואיזה מזל שהבאתי אותך!! לדעתי את חובה במסיבת רווקות ❤️</p>
+      <footer><b>לירון</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>את הכי מושלמת בעולם!!!
+באמת!!
+אחרי שהלכת דיברנו מלא על איזה כיף היה
+וגם שכולנו חששנו ולא ידענו בדיוק למה לצפות
+ועלית על הכלללל
+באמת היה וואו
+וזורם ואנחנו ממש מודות לך!!! ❤️</p>
+      <footer><b>הילה</b> · מסיבת רווקות</footer>
+    </article>
+  </div>
+  <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
+
+  <a class="site" href="https://www.linoynissim.co.il" target="_blank" rel="noopener">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+    linoynissim.co.il
+  </a>
+
+  <button class="share" id="share" type="button">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></svg>
+    שיתוף הכרטיס
+  </button>
+</main>
+<div class="toast" id="toast">הקישור הועתק</div>
+
+<script>
+  const rv = document.getElementById('reviews'), dots = [...document.querySelectorAll('#dots i')];
+  rv.addEventListener('scroll', () => {
+    const cards = [...rv.children], mid = rv.getBoundingClientRect().left + rv.clientWidth / 2;
+    let best = 0, dist = Infinity;
+    cards.forEach((c, i) => { const r = c.getBoundingClientRect(), d = Math.abs(r.left + r.width / 2 - mid); if (d < dist) { dist = d; best = i; } });
+    dots.forEach((d, i) => d.classList.toggle('on', i === best));
+  }, { passive: true });
+  document.getElementById('share').addEventListener('click', async () => {
+    const data = { title: 'לינוי ניסים ונפלאות', text: 'סטנדאפיסטית וקומיקאית לאירועים 🎤', url: location.href };
+    try {
+      if (navigator.share) return await navigator.share(data);
+      await navigator.clipboard.writeText(location.href);
+      const t = document.getElementById('toast');
+      t.classList.add('show'); setTimeout(() => t.classList.remove('show'), 1800);
+    } catch (e) {}
+  });
+</script>
+</body>
+</html>
