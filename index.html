@@ -74,7 +74,24 @@
   h2::before, h2::after { content: ""; flex: 1; height: 1px; background: linear-gradient(to left, transparent, #ffc9a6); }
   h2::after { background: linear-gradient(to right, transparent, #ffc9a6); }
   .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
-  .gallery img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 12px; display: block; }
+  .gallery button { padding: 0; border: 0; background: var(--soft); border-radius: 12px; overflow: hidden; cursor: zoom-in; aspect-ratio: 1; }
+  .gallery img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .3s; }
+  .gallery button:hover img { transform: scale(1.04); }
+  .gallery:not(.open) .more { display: none; }
+  .show-more {
+    margin-top: 12px; background: none; border: 1px solid var(--line); border-radius: 99px; padding: 8px 18px;
+    font: 500 14px "Rubik", sans-serif; color: var(--orange-text); cursor: pointer;
+  }
+  .show-more:hover { border-color: #ffc9a6; }
+  .lb { position: fixed; inset: 0; z-index: 20; background: #1b1411ee; display: none; align-items: center; justify-content: center; touch-action: pan-y; }
+  .lb.on { display: flex; animation: fade .2s ease-out; }
+  .lb img { width: min(92vw, 560px); aspect-ratio: 1; object-fit: cover; border-radius: 16px; box-shadow: 0 20px 50px -20px #000; }
+  .lb button { position: absolute; background: #ffffff1f; border: 0; color: #fff; width: 44px; height: 44px; border-radius: 50%; font-size: 22px; cursor: pointer; display: grid; place-items: center; }
+  .lb .x { top: 16px; left: 16px; }
+  .lb .nx { left: 12px; top: 50%; translate: 0 -50%; }
+  .lb .pv { right: 12px; top: 50%; translate: 0 -50%; }
+  .lb .count { direction: ltr; position: absolute; bottom: 22px; color: #ffffffb3; font-size: 14px; }
+  @keyframes fade { from { opacity: 0; } }
 
   .reviews {
     display: flex; align-items: flex-start; gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory;
@@ -90,9 +107,9 @@
   .review p { font-size: 14px; line-height: 1.6; white-space: pre-line; }
   .review footer { margin-top: 10px; font-size: 13px; color: var(--muted); }
   .review footer b { color: var(--text); font-weight: 700; }
-  .dots { display: flex; justify-content: center; gap: 6px; }
-  .dots i { width: 6px; height: 6px; border-radius: 99px; background: var(--line); transition: .2s; }
-  .dots i.on { width: 18px; background: var(--orange); }
+  .dots { display: flex; justify-content: center; flex-wrap: wrap; gap: 5px; max-width: 300px; margin: 0 auto; }
+  .dots i { width: 5px; height: 5px; border-radius: 99px; background: var(--line); transition: .2s; }
+  .dots i.on { width: 14px; background: var(--orange); }
 
   .social { margin-top: 22px; display: flex; justify-content: center; gap: 12px; }
   .social a {
@@ -194,11 +211,26 @@
   </a>
 
   <h2>מהאירועים האחרונים</h2>
-  <div class="gallery">
-    <img src="gallery/1.jpg" alt="לינוי מנחה משחק עם חוגגת" loading="lazy">
-    <img src="gallery/2.jpg" alt="מופע ביום הולדת" loading="lazy">
-    <img src="gallery/3.jpg" alt="משחק עם כיסויי עיניים" loading="lazy">
+  <div class="gallery" id="gallery">
+    <button type="button" data-i="0"><img src="gallery/p00.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="1"><img src="gallery/p16.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="2"><img src="gallery/p06.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="3"><img src="gallery/p09.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="4"><img src="gallery/p01.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="5"><img src="gallery/p03.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="6" class="more"><img src="gallery/p02.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="7" class="more"><img src="gallery/p05.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="8" class="more"><img src="gallery/p07.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="9" class="more"><img src="gallery/p08.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="10" class="more"><img src="gallery/p12.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="11" class="more"><img src="gallery/p13.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="12" class="more"><img src="gallery/p15.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="13" class="more"><img src="gallery/p10.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="14" class="more"><img src="gallery/p11.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="15" class="more"><img src="gallery/p14.jpg" alt="מתוך אירוע" loading="lazy"></button>
+    <button type="button" data-i="16" class="more"><img src="gallery/p04.jpg" alt="מתוך אירוע" loading="lazy"></button>
   </div>
+  <button class="show-more" id="showMore" type="button">לכל התמונות (17)</button>
 
   <h2>מה אומרים</h2>
   <div class="reviews" id="reviews">
@@ -209,6 +241,35 @@
 יש לך כישרון מיוחד לחבר בין אנשים, לשבור את הקרח ולהכניס כל כך הרבה שמחה ואנרגיה טובה לחדר. בזכותך הערב היה מלא בצחוק ורגעים בלתי נשכחים!
 תודה על הכל ושניפגש בשמחות 🎉</p>
       <footer><b>רותם</b> · יום הולדת 60 לאמא</footer>
+    </article>
+    <article class="review">
+      <p>אוקיי אז איך אני אסכם רק רציתי להגיד תודה ענקית על ערב רווקות פשוט מושלם! ❤️
+היית קורעת מצחוק, עם אנרגיות מטורפות וזרימה מטורפת עם כולן
+מהדקה הראשונה הרמת את האווירה, הכלה הייתה בעננים, וכולנו נהננו ממש!
+ממליצה עלייך מכל הלב – את אלופה אמיתית 👑</p>
+      <footer><b>נעמה</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>ממליצה מכל הלב על לינוי 🤍
+הזמנתי אותה למסיבת הרווקות שלי והיה פשוט מושלם!
+הפעילות קלילה, מצחיקה ומדויקת, שוברת קרח גם כשלא כולן מכירות והבנות נהנו בטירוף
+קיבלתי עליה מלא מחמאות, ואין ספק שזו הייתה הבחירה הכי נכונה
+מי שמחפשת חוויה כיפית ובלתי נשכחת זו לגמרי הבחירה ❤️</p>
+      <footer>מסיבת רווקות · מתוך סטורי באינסטגרם</footer>
+    </article>
+    <article class="review">
+      <p>לינוי היקרה ❤️ את ממש תסלחי לי על הדילאיי הדרמטי הזה 😅 רק עכשיו האלכוהול התפוגג
+אני רוצה להגיד לך תודה רבה על פעילות מהממת מלאה בצחוק ושמחה! כולנו עפנו עלייך קרעת אותנו מצחוק!!! את חיברת איחדת ושברת את הקרח בין הבנות שלא מכירות אחת את השנייה ועשית לנו ללא ספק חוויה נדירה ומלאה בצחוק
+תמשיכי לעשות את המצווה הזו
+תודה עלייך 🙏</p>
+      <footer><b>עדי</b></footer>
+    </article>
+    <article class="review">
+      <p>המון המון תודה ❤️
+אחותי וכל הבנות (כולל אותי 😉) נהנו בטירוף!!
+היה מצחיק, אווירה פתוחה וכיפית, גם בנות שפחות הכירו אחת את השנייה נפתחו והיה פשוט מושלם
+וכמובן שאמליץ עלייך</p>
+      <footer><b>לאנה</b> · מסיבת רווקות</footer>
     </article>
     <article class="review">
       <p>היי חיים שלי ❤️ כמובן שאני הכי ממליצה עלייך בעולם!!! את מה שעשית לי את המסיבת רווקות וכולן אחר כך באו ואמרו לי שאת הכי מצחיקה בעולם ואיזה מזל שהבאתי אותך!! לדעתי את חובה במסיבת רווקות ❤️</p>
@@ -224,8 +285,67 @@
 וזורם ואנחנו ממש מודות לך!!! ❤️</p>
       <footer><b>הילה</b> · מסיבת רווקות</footer>
     </article>
+    <article class="review">
+      <p>היה הכי מושלם שיששש הכלה נהנתה ברמות והרמת את האווירה הכי שיש ❤️
+תודה רבה לך על ההפעלה המיוחדת והמתנות השוות חחחח
+היה אש 🥰
+וכמובן אמליץ לחברות</p>
+      <footer><b>שביט</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>הייייי
+וואו היה כיף ברמות, אווירה טובה, לא הפסקנו לצחוק 🤣
+הגעת עם אנרגיה טובה ועם כשרון מטורף
+חד משמעית עשינו בחירה טובה
+תודה רבה לך על הערב הזה ❤️</p>
+      <footer><b>ספיר</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>לינוי אהובה
+תקשיבייייי שאת הבחורה הכי טובה למסיבת רווקות!!!
+נהנינו וצחקנו ברמות היית הכי מודייקת שיש!
+תודה רבה על הכלללל ❤️</p>
+      <footer><b>בת אל</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>היי, רציתי לומר שממש ממש עפנו עלייך אתמול. כולן!
+ממש עשית את הערב, היה קורע ומגבש בדיוק כמו שרציתי ❤️
+תודה ממש</p>
+      <footer><b>עדן</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>יואו היה נדיר!!!
+תודה מלכה ❤️
+לינויי את מ-ו-ש-ל-מ-ת והצחקת אותנו ברמות!!! אין אין דברים כמוך צחוקים של החיייםםם עשית לנו ערב מטורףףף תודה ❤️</p>
+      <footer><b>אלינוי</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>וואי היה מושלםםםם
+תודה רבה לך ❣️
+הצלחת להרים, להצחיק והכי חשוב להכניס אותי לראש עם כל הכמות ששתיתי חחחחחח</p>
+      <footer><b>אודיה</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>הייי!! וואי היה ממש ממש כיף אתמול!
+התאוששתי בהחלט וממש נהניתי
+היית מדויקת, ובאמת כל מה שיכולתי לבקש ❤️</p>
+      <footer><b>עדן</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>היייי אין עליך תודה רבה עשית לנו את הערב באמתתת היה מצחיק כיף ואנרגיות טובות שבת מבורכת ❤️</p>
+      <footer><b>אדר</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>הייי לינוי 🫶 שבוע טוב! סליחה על הדילאי היה נדירררררר איתך ברמות הרסת אותנו מצחוק ממש! 🤍</p>
+      <footer><b>עדן</b> · מסיבת רווקות</footer>
+    </article>
+    <article class="review">
+      <p>ואווווו היה צחוקים ברמות
+השתלבת בטירוף והיה פשוט נדיר באמת</p>
+      <footer><b>יובל</b> · מסיבת רווקות</footer>
+    </article>
   </div>
-  <div class="dots" id="dots"><i class="on"></i><i></i><i></i></div>
+  <div class="dots" id="dots"></div>
 
   <a class="site" href="https://www.linoynissim.co.il" target="_blank" rel="noopener">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M2 12h20M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
@@ -237,10 +357,35 @@
     שיתוף הכרטיס
   </button>
 </main>
+<div class="lb" id="lb" role="dialog" aria-label="תמונות מאירועים">
+  <img id="lbImg" alt="">
+  <button class="x" id="lbX" type="button" aria-label="סגירה">✕</button>
+  <button class="pv" id="lbPv" type="button" aria-label="הקודמת">›</button>
+  <button class="nx" id="lbNx" type="button" aria-label="הבאה">‹</button>
+  <span class="count" id="lbCount"></span>
+</div>
 <div class="toast" id="toast">הקישור הועתק</div>
 
 <script>
-  const rv = document.getElementById('reviews'), dots = [...document.querySelectorAll('#dots i')];
+  const rv = document.getElementById('reviews'), dotsBox = document.getElementById('dots');
+  [...rv.children].forEach((_, i) => dotsBox.appendChild(Object.assign(document.createElement('i'), { className: i ? '' : 'on' })));
+  const dots = [...dotsBox.children];
+
+  const gal = document.getElementById('gallery'), shots = [...gal.querySelectorAll('img')].map(i => i.src);
+  document.getElementById('showMore').addEventListener('click', e => { gal.classList.add('open'); e.currentTarget.remove(); });
+  const lb = document.getElementById('lb'), lbImg = document.getElementById('lbImg'), lbCount = document.getElementById('lbCount');
+  let cur = 0;
+  const show = i => { cur = (i + shots.length) % shots.length; lbImg.src = shots[cur]; lbCount.textContent = `${cur + 1} / ${shots.length}`; };
+  gal.addEventListener('click', e => { const b = e.target.closest('button'); if (!b) return; show(+b.dataset.i); lb.classList.add('on'); });
+  const close = () => lb.classList.remove('on');
+  document.getElementById('lbX').onclick = close;
+  document.getElementById('lbNx').onclick = e => { e.stopPropagation(); show(cur + 1); };
+  document.getElementById('lbPv').onclick = e => { e.stopPropagation(); show(cur - 1); };
+  lb.addEventListener('click', e => { if (e.target === lb) close(); });
+  addEventListener('keydown', e => { if (!lb.classList.contains('on')) return; if (e.key === 'Escape') close(); if (e.key === 'ArrowLeft') show(cur + 1); if (e.key === 'ArrowRight') show(cur - 1); });
+  let x0 = null;
+  lb.addEventListener('touchstart', e => x0 = e.touches[0].clientX, { passive: true });
+  lb.addEventListener('touchend', e => { if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; if (Math.abs(dx) > 40) show(cur + (dx > 0 ? 1 : -1)); x0 = null; });
   rv.addEventListener('scroll', () => {
     const cards = [...rv.children], mid = rv.getBoundingClientRect().left + rv.clientWidth / 2;
     let best = 0, dist = Infinity;
